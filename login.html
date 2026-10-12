@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Portal Login</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .login {
+            background-color: white;
+            width: 320px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h1 { color: darkblue; }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            padding: 10px 25px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #message { color: red; }
+    </style>
+</head>
+<body>
+
+<div class="login">
+    <h1>College Portal</h1>
+    <h2>Login</h2>
+
+    <form onsubmit="login(event)">
+        <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+        </select><br>
+
+        <input type="text" id="username"
+               placeholder="Username" required><br>
+
+        <input type="password" id="password"
+               placeholder="Password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    
+function login(event) {
+    event.preventDefault();
+
+    var role = document.getElementById("role").value;
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    if (username.trim() === "" || password === "" || role === "") {
+        document.getElementById("message").innerText =
+            "Please fill all fields!";
+        return;
+    }
+
+    localStorage.setItem("loginDetails", JSON.stringify({
+        username: username,
+        role: role
+    }));
+
+    if (role === "admin") {
+        window.location.href = "admin.html";
+    } else {
+        window.location.href = "student.html";
+    }
+}
+
+</script>
+
+</body>
+</html>
